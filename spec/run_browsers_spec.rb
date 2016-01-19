@@ -1,27 +1,26 @@
 require 'spec_helper'
+require 'securerandom'
 
 describe 'run browsers' do
-  let(:counter){ 1 }
 
-  it 'runs all browsers' do
-    binding.pry
-  end
-
-  def open_firefox(url="http://192.168.99.100:4444")
-    DriverRegistrator.register_firefox_driver(counter, url)
-    firefox = Capybara::Session.new(counter)
-    firefox.driver.browser.manage.window.resize_to(1600, 1200)
-    firefox.visit("http://www.google.com")
-    counter += 1
-    firefox
-  end
-
-  def open_chrome(url="http://192.168.99.100:4444")
-    DriverRegistrator.register_chrome_driver(counter, url)
-    chrome = Capybara::Session.new(counter)
-    chrome.driver.browser.manage.window.resize_to(1600, 1200)
-    chrome.visit("http://www.google.com")
-    counter += 1
-    chrome
+  it "visits delfi" do
+    puts "Started a loop in #{ENV[:TEST_ENV_NUMBER.to_s].inspect}"
+    while true do
+      fox = open_browser(:register_firefox_driver)
+      puts "Browser opened with #{ENV[:TEST_ENV_NUMBER.to_s].inspect}"
+      begin
+        fox.visit("http://www.delfi.ee")
+        puts "Visited delfi with #{ENV[:TEST_ENV_NUMBER.to_s].inspect}"
+        10.times do
+          sleep 1
+          fox.execute_script "window.scrollBy(0,1000)"
+          sleep 1
+          puts "#{ENV[:TEST_ENV_NUMBER.to_s].inspect} scrolling..."
+        end
+      rescue Exception => e
+        puts e.message
+        puts e.backtrace
+      end
+    end
   end
 end
