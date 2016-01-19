@@ -1,4 +1,4 @@
 require 'spec_helper'
 require 'securerandom'
 
-describe { it { open_browser  } }
+describe { it { run_delfi_visiting_loop  } }

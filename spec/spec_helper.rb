@@ -26,7 +26,7 @@ RSpec.configure do |config|
     firefox
   end
 
-  def open_browser
+  def run_delfi_visiting_loop
     puts "warmuping #{ENV[:TEST_ENV_NUMBER.to_s].inspect}"
     sleep 5
     puts "Started a loop in #{ENV[:TEST_ENV_NUMBER.to_s].inspect}"
