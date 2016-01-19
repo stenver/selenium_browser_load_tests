@@ -1,3 +1,3 @@
 #!/bin/bash
 
-parallel_rspec -n 60 spec
+parallel_rspec -n 120 spec
