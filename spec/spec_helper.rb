@@ -20,7 +20,7 @@ end
 RSpec.configure do |config|
   def open_browser(action)
     random_string = SecureRandom.hex
-    grid_ip = ENV["GRID_IP"] || localhost
+    grid_ip = ENV["GRID_IP"] || "127.0.0.1"
     DriverRegistrator.public_send(action, random_string, "http://#{grid_ip}:4444/wd/hub")
     firefox = Capybara::Session.new(random_string)
     firefox.driver.browser.manage.window.resize_to(1600, 1200)
